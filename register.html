@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Тіркелу</title>
+    <style>
+        body { display: flex; justify-content: center; align-items: center; height: 100vh; background: #f0f2f5; font-family: sans-serif; }
+        .reg-box { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); width: 350px; text-align: center; }
+        input, select { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        .btn { background: #00b894; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; cursor: pointer; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <div class="reg-box">
+        <h2>Тіркелу</h2>
+        <form method="POST">
+            <input type="text" name="fullname" placeholder="Аты-жөні" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="number" name="age" placeholder="Жасы" required>
+            <input type="text" name="phone" placeholder="Телефон" required>
+            <input type="password" name="password" placeholder="Құпиясөз" required>
+            <select name="gender"><option>Ер</option><option>Әйел</option></select>
+            <select name="course"><option>1 курс</option><option>2 курс</option><option>3 курс</option><option>4 курс</option></select>
+            <button type="submit" class="btn">Тіркелу</button>
+        </form>
+        <br><a href="/" style="color: #636e72; text-decoration: none;">Артқа</a>
+    </div>
+</body>
+</html>

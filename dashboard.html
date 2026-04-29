@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Жеке кабинет - ҚазҰҚПУ</title>
+    <style>
+        body { margin: 0; display: flex; font-family: 'Segoe UI', sans-serif; height: 100vh; background: #f0f2f5; }
+        .sidebar { width: 280px; background: #2d3436; color: white; display: flex; flex-direction: column; padding: 20px; }
+        .user-name { text-align: center; font-size: 22px; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid #636e72; }
+        .menu-item { background: #636e72; color: white; padding: 12px; margin: 5px 0; text-align: center; text-decoration: none; border-radius: 8px; transition: 0.3s; border: none; font-size: 16px; cursor: pointer; }
+        .menu-item:hover, .active { background: #0984e3; }
+        .logout { margin-top: auto; background: #d63031; }
+        .main-content { flex-grow: 1; padding: 40px; }
+        .card { background: white; padding: 35px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); max-width: 800px; }
+        .info-row { border-bottom: 1px solid #eee; padding: 12px 0; font-size: 18px; display: flex; }
+        .info-row b { width: 150px; color: #2d3436; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="user-name">{{ user['fullname'] }}</div>
+        <a href="/dashboard" class="menu-item {% if section=='home' %}active{% endif %}">Басты бет</a>
+        <a href="/dashboard/card" class="menu-item {% if section=='card' %}active{% endif %}">Студент картасы</a>
+        <a href="/dashboard/edit" class="menu-item {% if section=='edit' %}active{% endif %}">Мәлімет өзгерту</a>
+        <a href="/dashboard/password" class="menu-item {% if section=='password' %}active{% endif %}">Құпиясөз өзгерту</a>
+
+        <form action="/dashboard/delete" method="POST" onsubmit="return confirm('Аккаунтты өшіруді растайсыз ба?')">
+            <button type="submit" class="menu-item" style="width:100%; background:#4b4b4b;">Аккаунт өшіру</button>
+        </form>
+
+        <a href="/logout" class="menu-item logout">Шығу</a>
+    </div>
+
+    <div class="main-content">
+        <div class="card">
+            {% if section == 'home' %}
+                <h1>ҚазҰҚПУ студенттер жүйесі</h1>
+                <p>Қазақ ұлттық қыздар педагогикалық университеті — жетекші оқу орны.</p>
+                <p>Миссиясы: Білімді мамандар дайындау және ғылымды дамыту.</p>
+            {% elif section == 'card' %}
+                <h1>Студент картасы</h1>
+                <div class="info-row"><b>ID:</b> {{ user['id'] }}</div>
+                <div class="info-row"><b>Аты-жөні:</b> {{ user['fullname'] }}</div>
+                <div class="info-row"><b>Email:</b> {{ user['email'] }}</div>
+                <div class="info-row"><b>Курс:</b> {{ user['course'] }}</div>
+                <div class="info-row"><b>Телефон:</b> {{ user['phone'] }}</div>
+            {% elif section == 'edit' %}
+                <h1>Мәлімет өзгерту</h1>
+                <form method="POST">
+                    <label>Аты-жөні:</label>
+                    <input type="text" name="fullname" value="{{ user['fullname'] }}">
+                    <label>Email:</label>
+                    <input type="email" name="email" value="{{ user['email'] }}">
+                    <button type="submit" class="menu-item active" style="border:none; padding: 10px 30px;">Сақтау</button>
+                </form>
+            {% elif section == 'password' %}
+                <h1>Құпиясөз өзгерту</h1>
+                <form method="POST">
+                    <input type="password" name="new_pass" placeholder="Жаңа құпиясөзді жазыңыз" required>
+                    <button type="submit" class="menu-item active" style="border:none; padding: 10px 30px;">Жаңарту</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
